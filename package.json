@@ -3,6 +3,7 @@
   "description": "A notification banner",
   "main": "notification-banner-wc.js",
   "scripts": {
+    "start": "polymer serve",
     "test": "polymer test",
     "test:chrome": "polymer test -l chrome"
   },
