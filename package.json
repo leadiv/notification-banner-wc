@@ -3,7 +3,8 @@
   "description": "A notification banner",
   "main": "notification-banner-wc.js",
   "scripts": {
-    "test": "polymer test"
+    "test": "polymer test",
+    "test:chrome": "polymer test -l chrome"
   },
   "dependencies": {
     "@polymer/polymer": "^3.0.0"
