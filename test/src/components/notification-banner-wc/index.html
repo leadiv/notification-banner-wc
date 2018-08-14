@@ -18,23 +18,57 @@
                 <notification-banner-wc></notification-banner-wc>
             </template>
         </test-fixture>
-       
+
+        <test-fixture id="BasicUserNotificationFixture">
+            <template>
+                <notification-banner-wc>
+                    <span slot="body">This is a basic user notification.</span>
+                </notification-banner-wc>
+            </template>
+        </test-fixture>
+
         <script type="module">
        
             describe('notification-banner-wc', () => {
        
-                it('should not display a notification if the body slot is empty', function xyz() {
+                it('should have attribute of inactive set when there is no content.', () => {
        
                     const element = fixture('EmptyTestFixture');
-                    const elementShadowRoot = element.shadowRoot;
-                    const expected = '';
-                    const actual = elementShadowRoot.querySelector('#body').textContent;
+                    const expected = 'inactive';
+                    const actual = element.getAttribute('inactive');
        
                     expect(actual).to.equal(expected);
        
                 });
-       
-                it('should be able to display a user notification');
+
+                it('should not display anything visually when there is no content.', () => {
+
+                    const element = fixture('EmptyTestFixture');
+                    const expected = 'none';
+                    const actual = getComputedStyle(element, null).display;
+
+                    expect(actual).to.equal(expected);
+
+                });
+
+                it('should be able to display a user notification', () => {
+
+                    const element = fixture('BasicUserNotificationFixture');
+                    const expected = 'active';
+                    const actual = element.getAttribute('inactive');
+
+                    expect(actual).to.equal(expected);
+                });
+
+                it('should be able to display a user notification visually', () => {
+
+                    const element = fixture('BasicUserNotificationFixture');
+                    const expected = 'inline';
+                    const actual = getComputedStyle(element.shadowRoot.querySelector('#body'), null).display;
+
+                    expect(actual).to.equal(expected);
+                });
+
                 it('should be able to dismiss a notification');
                 it('should not show a notification if it has been dismissed before');
                 it('should be able to link the whole notification if only one link is found in the body');
