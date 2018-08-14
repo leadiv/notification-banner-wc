@@ -28,7 +28,24 @@
         </test-fixture>
 
         <script type="module">
-       
+     
+            // This function ensures that after the element is returned
+            // from the fixture on the next tick is when the tests run.
+            // This allows time for setup tasks/processing to be done. 
+            //
+            function getFixture(id) {
+
+                return new Promise((resolve) => {
+
+                    const element = fixture(id);
+
+                    setTimeout(() => {
+
+                        resolve(element);                        
+                    }, 0);
+                });
+            }
+
             describe('notification-banner-wc', () => {
        
                 it('should have attribute of inactive set when there is no content.', () => {
@@ -53,20 +70,24 @@
 
                 it('should be able to display a user notification', () => {
 
-                    const element = fixture('BasicUserNotificationFixture');
-                    const expected = 'active';
-                    const actual = element.getAttribute('inactive');
+                    return getFixture('BasicUserNotificationFixture').then((element) => {
 
-                    expect(actual).to.equal(expected);
+                        const expected = 'active';
+                        const actual = element.getAttribute('inactive');
+
+                        expect(actual).to.equal(expected);
+                    });
                 });
 
                 it('should be able to display a user notification visually', () => {
 
-                    const element = fixture('BasicUserNotificationFixture');
-                    const expected = 'inline';
-                    const actual = getComputedStyle(element.shadowRoot.querySelector('#body'), null).display;
+                    return getFixture('BasicUserNotificationFixture').then((element) => {
 
-                    expect(actual).to.equal(expected);
+                        const expected = 'inline';
+                        const actual = getComputedStyle(element.shadowRoot.querySelector('#body'), null).display;
+
+                        expect(actual).to.equal(expected);
+                    });
                 });
 
                 it('should be able to dismiss a notification');
