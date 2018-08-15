@@ -23,12 +23,23 @@
   <body>
     <div class="vertical-section-container centered">
       <h2>notification-banner-wc demo</h2>
-        <h3>Empty State</h3>
-          <demo-snippet>
-            <template>
-              <notification-banner-wc></notification-banner-wc>
-            </template>
-          </demo-snippet>
+      <h3>Empty State</h3>
+      <demo-snippet>
+        <template>
+          <notification-banner-wc></notification-banner-wc>
+        </template>
+      </demo-snippet>
+
+      <h3>Basic Notification State</h3>
+      <demo-snippet>
+        <template>
+          <notification-banner-wc>
+            <span slot="body">
+              Hello there. This is a notification.
+            </span>
+          </notification-banner-wc>
+        </template>
+      </demo-snippet>
     </div>
   </body>
 </html>
